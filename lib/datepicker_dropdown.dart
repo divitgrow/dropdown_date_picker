@@ -197,7 +197,7 @@ class _DropdownDatePickerState extends State<DropdownDatePicker> {
   var monthselVal = '';
   var dayselVal = '';
   var yearselVal = '';
-  int daysIn = 32;
+  int daysIn = 31;
   late List<int> listdates = [];
   late List<int> listyears = [];
   late List<dynamic> listMonths = [];
@@ -210,6 +210,9 @@ class _DropdownDatePickerState extends State<DropdownDatePicker> {
         widget.selectedMonth != null ? widget.selectedMonth.toString() : '';
     yearselVal =
         widget.selectedYear != null ? widget.selectedYear.toString() : '';
+    if (monthselVal != '' && yearselVal != '') {
+      daysIn = daysInMonth(int.parse(yearselVal), int.parse(monthselVal));
+    }
     listdates = List<int>.generate(daysIn, (index) => index + 1);
     listyears = List<int>.generate(
       (widget.endYear ?? DateTime.now().year) - (widget.startYear ?? 1900) + 1,
